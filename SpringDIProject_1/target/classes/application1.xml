@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 1. 공통부분 : CommonsDAO -->
+	<!-- p: setter 호출 / c: 생성자 호출 -->
+	<!--  <bean id="comm" class="com.sist.di.CommonsDAO"/>  => 매개변수가 없는 생성자 호출
+		  CommonsDAO comm=new CommonsDAO() 
+		  
+		  <bean id="comm" class="com.sist.di.CommonsDAO" c:driver=""/> => 매개변수가 있는 생성자 호출
+	-->
+	<!-- p:comm-ref="id 명칭" => 클래스 객체 주소를 받음 
+		 p:username="hr" => 일반 변수 값을 대입함
+		 init-method="init" => 시작과 동시에 메소드를 호출함 (자동호출)
+		 destroy-method="destroy" => 메모리 해제 (쓰지 않아도 해제됨 => 확인용)
+	-->
+	<bean id="comm" class="com.sist.di.CommonsDAO"
+		c:driver="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:XE"
+		p:username="hr"
+		p:password="happy"
+	 />
+	 <bean id="dDao" class="com.sist.di.DeptDAO"
+	 	p:comm-ref="comm"
+	 	init-method="init"
+	 />
+	  <bean id="eDao" class="com.sist.di.EmpDAO"
+	 	p:comm-ref="comm" 
+	 />
+	 <!-- 
+	 	1. 메모리 할당 (전체 등록된 bean에 대해) => 각 bean마다 객체 생성을 먼저 함 => 생성자 메개변수 설정
+	 	2. setter에 값을 채움
+	 	3. init-method 호출
+	 	4. 사용자가 처리 => 필요한 메소드 호출 
+	 	5. destroy-method 호출
+	 	6. 메모리 해제
+	  -->
+</beans>
