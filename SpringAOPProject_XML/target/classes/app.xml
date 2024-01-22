@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="dao" class="com.sist.dao.MyDAO"/>
+	<!-- 
+		container
+		ApplicationContext
+		AnnotationConfigContext
+		WepApplicationContext
+		=> 객체 생성 / 주입 / 소멸 => XML, Annotation
+        
+        DI => 객체 생성시에 멈버변수의 초기화
+        AOP => 반복제거
+        ============================================
+        라이브러리
+	 -->
+</beans>
