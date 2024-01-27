@@ -42,6 +42,7 @@ public class EmpDAO {
 			Class.forName(ds.getDriver());
 		}catch(Exception ex) {}
 	}
+	
 	// before
 	public void getConnection()
 	{
